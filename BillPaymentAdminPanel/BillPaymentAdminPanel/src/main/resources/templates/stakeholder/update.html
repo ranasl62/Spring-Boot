@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Stakeholder</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading" style="font-size: 20px; text-align: center;">Update StakeHolder</div>
+                <div class="panel-body">
+                    <form th:action="${'/stake/edit/' + stake.getId()}" th:object="${stake}" method="post">
+                        <div class="form-group">
+                            <label for="stakeholder_id">Id</label>:
+                            <input disabled type="text" th:field="*{stakeholder_id}" id="stakeholder_id" class="form-control" autofocus="autofocus" placeholder="Name">
+                            <label th:if="${#fields.hasErrors('name')}" th:errors="*{id}" th:class="'error'">Enter Name</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name</label>:
+                            <input type="text" th:field="*{name}" id="name" class="form-control" autofocus="autofocus" placeholder="Name">
+                            <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:class="'error'">Enter Name</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>:
+                            <input type="text" th:field="*{address}" id="address"  class="form-control" placeholder="Address">
+                            <label th:if="${#fields.hasErrors('address')}" th:errors="*{address}" th:class="'error'">Enter Name</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact_person_name">Contact Person Name</label>:
+                            <input type="text" th:field="*{contact_person_name}" id="contact_person_name"  class="form-control" autofocus="autofocus" placeholder="Contact person name">
+                            <label th:if="${#fields.hasErrors('contact_person_name')}" th:errors="*{contact_person_name}" th:class="'error'">Enter Name</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact_person_mobile">Contact Person Mobile</label>:
+                            <input type="number" th:field="*{contact_person_mobile}" id="contact_person_mobile"  class="form-control" autofocus="autofocus" placeholder="Contact person mobile">
+                            <label th:if="${#fields.hasErrors('contact_person_mobile')}" th:errors="*{contact_person_mobile}" th:class="'error'">Enter Name</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="sel1">Status(select one)</label>:
+                            <select th:field="*{status}" class="form-control" id="sel1">
+                                <option th:value="1">Active</option>
+                                <option th:value="0">Inactive</option>
+                            </select>
+                        </div>
+                        <!--<div class="form-group">-->
+                        <!--<div class="row">-->
+                        <!--<div class="col-sm-4 col-sm-offset-8">-->
+                        <!--<input type="submit"-->
+                        <!--name="login-submit"-->
+                        <!--id="login-submit"-->
+                        <!--class="form-control btn btn-primary"-->
+                        <!--value="Create Stakeholder">-->
+                        <!--</div>-->
+                        <!--<div class="col-sm-4 col-sm-offset-6">-->
+                        <!--<input type="reset" value="Reset" />-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <div style="padding-left: 620px;">
+                            <input type="submit" value="Update Stakeholder" class="from-control btn btn-success">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

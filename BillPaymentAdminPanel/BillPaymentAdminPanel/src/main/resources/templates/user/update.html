@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Update User</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div class="row" style="margin-bottom: 1px">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading" style="text-align: center; font-size: 20px;">Update User</div>
+                <div class="panel-body">
+                    <form th:action="${'/user/edit/' + user.getId()}" th:object="${user}" method="post">
+                        <div class="form-group">
+                            <label for="name">Name</label>:
+                            <input type="text" th:field="*{name}" id="name" class="form-control" autofocus="autofocus" placeholder="Name">
+                            <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:class="'error'">Name</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Username</label>:
+                            <input readonly type="text" th:field="*{username}" id="address"  class="form-control" placeholder="Username">
+                            <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}" th:class="'error'">Enter Name</label>
+                        </div>
+                        <!--<div class="form-group">-->
+                        <!--<label for="password">Password</label>:-->
+                        <!--<input readonly type="text" th:field="*{password}" id="password"  class="form-control" autofocus="autofocus" placeholder="password">-->
+                        <!--<label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:class="'error'">Password</label>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label for="contact_person_mobile">Stakeholder user</label>:-->
+                        <!--<input type="text" th:field="*{is_stakeholder_user}" id="contact_person_mobile"  class="form-control" autofocus="autofocus" placeholder="Stakeholder user">-->
+                        <!--<label th:if="${#fields.hasErrors('is_stakeholder_user')}" th:errors="*{is_stakeholder_user}" th:class="'error'">Stakeholder user</label>-->
+                        <!--</div>-->
+
+                        <div class="form-group">
+                            <label for="stakeHolder_user">Stakeholder user</label>:
+                            <!--<input type="number" th:field="*{transientId}" id="stakeHolder_id"  class="form-control" autofocus="autofocus" placeholder="Stakeholder Id">-->
+                            <select th:field="*{is_stakeholder_user}"  class="form-control" id="stakeHolder_user">
+                                <option th:value="1">Yes</option>
+                                <option th:value="0">No</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="stakeHolder_id">Stakeholder Name</label>:
+                            <!--<input type="number" th:field="*{transientId}" id="stakeHolder_id"  class="form-control" autofocus="autofocus" placeholder="Stakeholder Id">-->
+                            <select  th:field="*{transientId}"  class="form-control" id="stakeHolder_id">
+                                <option th:value="0">None</option>
+                                <option th:each="st : ${stake}" th:value="${st.getId()}" th:text="${st.getName()}">None</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rolese">Roles</label>
+                            <input readonly type="text" th:field="*{role}" id="rolese" class="form-control">
+                        </div>
+                        <!--<div class="form-group">-->
+                        <!--<label for="sel1">Role(select one)</label>:-->
+                        <!--<select th:field="*{role}" class="form-control" id="sel1">-->
+                        <!--<option th:value="None">None</option>-->
+                        <!--<option th:value="ROLE_ADMIN">ADMIN</option>-->
+                        <!--<option th:value="ROLE_SUPER_ADMIN">SUPER_ADMIN</option>-->
+                        <!--<option th:value="ROLE_ADMIN_REPORT">ADMIN_REPORT</option>-->
+                        <!--<option th:value="ROLE_STAKEHOLDER_API">STAKEHOLDER_API</option>-->
+                        <!--<option th:value="ROLE_STAKEHOLDER_REPORT">STAKEHOLDER_REPORT</option>-->
+                        <!--</select>-->
+                        <!--</div>-->
+                        <div class="form-group">
+                            <label for="sel1">Status(select one)</label>:
+                            <select th:field="*{status}" class="form-control" id="sel1">
+                                <option th:value="1">Active</option>
+                                <option th:value="0">Inactive</option>
+                            </select>
+                        </div>
+                        <!--<div class="form-group">-->
+                        <!--<label for="created_by">Created By</label>:-->
+                        <!--<input type="text" th:field="*{created_by}" id="created_by"  class="form-control" autofocus="autofocus" placeholder="Status">-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label for="updated_by">Updated By</label>:-->
+                        <!--<input type="text" th:field="*{updated_by}" id="updated_by"  class="form-control" autofocus="autofocus" placeholder="Status">-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label for="status">Status</label>:-->
+                        <!--<input type="number" th:field="*{status}" id="status"  class="form-control" autofocus="autofocus" placeholder="Status">-->
+                        <!--</div>-->
+
+                        <!--<div class="form-group">-->
+                        <!--<div class="row">-->
+                        <!--<div class="col-sm-4 col-sm-offset-8">-->
+                        <!--<input type="submit"-->
+                        <!--name="login-submit"-->
+                        <!--id="login-submit"-->
+                        <!--class="form-control btn btn-primary"-->
+                        <!--value="Create Stakeholder">-->
+                        <!--</div>-->
+                        <!--<div class="col-sm-4 col-sm-offset-6">-->
+                        <!--<input type="reset" value="Reset" />-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <div style="padding-left: 668px">
+
+                            <!--<input type="reset"  value="Reset" class="from-control btn btn-info">-->
+                            <input type="submit" value="Update User" class="from-control btn btn-success">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

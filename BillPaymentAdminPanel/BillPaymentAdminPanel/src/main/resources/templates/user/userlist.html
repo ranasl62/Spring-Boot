@@ -1,0 +1,51 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      layout:decorate="~{fragments/layout}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="text-align: center; font-size: 20px;"><span class="glyphicon glyphicon-user"></span> Users List</div>
+            <div class="panel-body">
+                <table class="table table-hover table-striped">
+                    <tr>
+                        <!--<th style="text-align: center">Id</th>-->
+                        <th style="text-align: center">Name</th>
+                        <th style="text-align: center">Username</th>
+                        <th style="text-align: center">Created By</th>
+                        <th style="text-align: center">Created Time</th>
+                        <th style="text-align: center">Updated By</th>
+                        <th style="text-align: center">Updated Time</th>
+                        <th style="text-align: center">Stakeholder User</th>
+                        <th style="text-align: center">Stakeholder Name</th>
+                        <th style="text-align: center">Status</th>
+                        <th style="text-align: center">Action</th>
+                    </tr>
+                    <tr th:each="user : ${users}">
+                        <!--<td th:text="${user.getId()}"></td>-->
+                        <td th:text="${user.getName()}"></td>
+                        <td th:text="${user.getUsername()}"></td>
+                        <td th:text="${user.created_by}"></td>
+                        <td th:text="${user.created_time}"></td>
+                        <td th:text="${user.updated_by}"></td>
+                        <td th:text="${user.updated_time}"></td>
+                        <td th:if="${user?.is_stakeholder_user?.equals('1')}">Yes</td>
+                        <td th:if="${user?.is_stakeholder_user?.equals('0')}">No</td>
+                        <!--<td th:text="${(user?.getStakeHolder()?.getId())}"></td>-->
+                        <td><a th:href="${'/stake/show/' + user?.getStakeHolder()?.getId()}" th:text="${(user?.getStakeHolder()?.getName())}"></a></td>
+                        <td th:if="${user.getStatus() == 1}">Active</td>
+                        <td th:if="${user.getStatus() == 0}">Inactive</td>
+                        <td> <a th:href="${'/user/edit/'+ user.getId()}" class="btn"> <i class="fa fa-pencil-square-o"></i> </a>  <a th:href="${'/user/delete/' + user.getId()}" class="btn"> <i class="fa fa-trash-o"></i> </a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

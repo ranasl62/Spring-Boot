@@ -1,0 +1,415 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div class="col-md-12">
+        <div class="panel panel-primary" style="background-color: #f1f1f1">
+            <div class="panel-heading" style="font-size: 20px; background-color: darkcyan"><span class="glyphicon glyphicon-list-alt"></span> Report</div>
+            <div class="panel-body">
+                <!--<button th:if="${reportList.size() > 0}" style="border-radius: 0; margin-bottom: 2px" id="exportButton" class="btn btn-success clearfix"><span class="fa fa-file-excel-o"></span> Export to Excel</button>-->
+                <!--<form th:action="@{/user/searchByName/stake}" th:object="${tempUser}" method="post" class="from-group">-->
+
+                    <!--&lt;!&ndash;<input class="from-control" type="datetime-local" data-date-format="DD MMMM YYYY" th:field="*{startDate}">&ndash;&gt;-->
+                    <!--<div class="form-group col-md-3">-->
+                        <!--<label for="stakeHolder_id">Search option</label>:-->
+                        <!--<select  class="form-control" id="stakeHolder_id">-->
+                            <!--<option th:value="None">None</option>-->
+                            <!--<option th:value="cutomerNumber">Search by Customer Number</option>-->
+                            <!--<option th:value="billNumber">Search by Bill Number</option>-->
+                            <!--&lt;!&ndash;<option th:value="stakename">Search by Stakeholder Name</option>&ndash;&gt;-->
+                            <!--<option th:value="status">Search by Status</option>-->
+                            <!--<option th:value="amount">Search by Amount Range</option>-->
+                            <!--<option th:value="daterange">Search by Date and Time Range</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                    <!--<div class="form-group col-md-4" style="margin-top: 5px">-->
+                        <!--<label for="id"></label>:-->
+                        <!--<input type="text"  id="id" class="form-control" autofocus="autofocus" placeholder="Enter your details">-->
+                        <!--&lt;!&ndash;<label th:if="${#fields.hasErrors('id')}" th:errors="*{id}" th:class="'error'">Enter Name</label>&ndash;&gt;-->
+                    <!--</div>-->
+                    <!--<div class="form-group col-md-4" style="margin-top: 4px">-->
+                        <!--<label for="name"></label>:-->
+                        <!--<input type="text" id="name" class="form-control" autofocus="autofocus" placeholder="This field is only for amount range">-->
+                        <!--&lt;!&ndash;<label th:if="${#fields.hasErrors('endAmount')}" th:errors="*{id}" th:class="'error'">Enter Name</label>&ndash;&gt;-->
+                    <!--</div>-->
+                    <!--<button type="submit" class="btn btn-primary btn-success" style="margin-top: 23px">Submit</button>-->
+                    <!--<input type="datetime-local" class="form-control" >-->
+                    <!--<input type="datetime-local" class="form-control" >-->
+                <!--</form>-->
+
+
+                <form th:action="@{/user/searchByName/stake}" th:object="${tempUser}" method="post" class="from-group">
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo1" style="width: 100%;">Search by Customer Number</button>
+                            <div id="demo1" class="collapse" style="margin-top: 5px;">
+                                <label for="customerNumber">Customer Number:</label>
+                                <input th:field="*{customerId}" type="text" id="customerNumber" class="form-control" autofocus="autofocus">
+                            </div>
+
+                        </div>
+                        <div class="form-group col-md-4">
+                            <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo2" style="width: 100%;">Search by Bill Number</button>
+                            <div id="demo2" class="collapse" style="margin-top: 5px;">
+                                <label for="billNumber">Bill Number:</label>
+                                <input th:field="*{billNumber}" type="text" id="billNumber" class="form-control" autofocus="autofocus">
+                            </div>
+
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo4" style="width: 100%;">Search by Status</button>
+
+                            <div id="demo4" class="collapse" style="margin-top: 5px;">
+                                <label for="status">Status:</label>
+                                <!--<input type="number" th:field="*{transientId}" id="stakeHolder_id"  class="form-control" autofocus="autofocus" placeholder="Stakeholder Id">-->
+                                <select th:field="*{statusId}" class="form-control" id="status">
+                                    <option th:value="0">None</option>
+                                    <option th:value="1">Pending</option>
+                                    <option th:value="2">Paid</option>
+                                    <option th:value="3">Due</option>
+                                    <option th:value="4">Canceled</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo5" style="width: 100%;">Search by Amount Range</button>
+                            <div id="demo5" class="collapse" style="margin-top: 5px;">
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <label for="from">From:</label>
+                                        <input th:field="*{amountForm}" type="text" id="from" class="form-control" autofocus="autofocus">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="to">To:</label>
+                                        <input th:field="*{amountTo}" type="text" id="to" class="form-control" autofocus="autofocus">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group col-md-4">
+                            <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo6" style="width: 100%;">Search by Date and Time Range</button>
+                            <div id="demo6" class="collapse" style="margin-top: 5px;">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="dateFrom">Date From:</label>
+                                        <input type="datetime-local" id="dateFrom" class="form-control" th:field="*{stardDate}">
+
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="dateTo">Date To:</label>
+                                        <input type="datetime-local" id="dateTo" class="form-control" th:field="*{endDate}">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="font-size: 20px; text-align: center; background-color: darkcyan;">Report List</div>
+            <div class="panel-body"  style="background-color: #f1f1f1;">
+                <button th:if="${reportList.size() > 0}" style="border-radius: 0; margin-bottom: 2px" id="exportButton" class="btn btn-primary clearfix"><span class="glyphicon glyphicon-save"></span> Export to Excel</button>
+                <div style="overflow: auto;">
+
+                    <table id="exportTable" class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th style="text-align: center">Id</th>
+                            <th style="text-align: center">Bank_Tranxn_Id</th>
+                            <th style="text-align: center">Bill_Amount</th>
+                            <th style="text-align: center">Bill_Number</th>
+                            <th style="text-align: center">Bill_Status</th>
+                            <th style="text-align: center">Bill_Type</th>
+                            <th style="text-align: center">Cancel_Date</th>
+                            <th style="text-align: center">Cancel_By</th>
+                            <th style="text-align: center">Customer_Number</th>
+                            <th style="text-align: center">Due_Amount</th>
+                            <th style="text-align: center">Due_Date</th>
+                            <th style="text-align: center">Issue_Date</th>
+                            <th style="text-align: center">Paid_By</th>
+                            <th style="text-align: center">Pay_Date</th>
+                            <th style="text-align: center">Remarks</th>
+                            <th style="text-align: center">Total_Amount</th>
+                            <th style="text-align: center">Utility_Tranxn_Id</th>
+                            <th style="text-align: center">Vat_Amount</th>
+                            <th style="text-align: center">Paid_Amount</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr th:each="report : ${reportList}">
+                            <td th:text="${report.getId()}"></td>
+                            <td th:text="${report.getBank_tranxn_id()}"></td>
+                            <td th:text="${report.getBill_amount()}"></td>
+                            <td th:text="${report.getBill_number()}"></td>
+
+                            <td th:if="${report.getBill_status_info().id == 1}">Pending</td>
+                            <td th:if="${report.getBill_status_info().id == 2}">Paid</td>
+                            <td th:if="${report.getBill_status_info().id == 3}">Due</td>
+                            <td th:if="${report.getBill_status_info().id == 4}">Canceled</td>
+
+                            <td th:text="${report.getBill_type()}"></td>
+                            <td th:text="${report.getCancel_date()}"></td>
+                            <td th:text="${report.getCanceled_by()}"></td>
+                            <td th:text="${report.getUsers().id}"></td>
+                            <td th:text="${report.getDue_amount()}"></td>
+                            <td th:text="${report.getIssue_date()}"></td>
+                            <td th:text="${report.getDue_date()}"></td>
+                            <td th:text="${report.getPaid_by()}"></td>
+                            <td th:text="${report.getPay_date()}"></td>
+                            <td th:text="${report.getRemarks()}"></td>
+                            <td th:text="${report.getTotal_amount()}"></td>
+                            <td th:text="${report.getUtility_tranxn_id() }"></td>
+                            <td th:text="${report.getVat_amount()}"></td>
+                            <td th:text="${report.getPaid_amount()}"></td>
+                            <!--<td> <a th:href="${'/stake/edit/'+ stakeholder.getId()}" class="btn"> <i class="fa fa-pencil-square-o"></i> </a>  <a th:href="${'/stake/delete/' + stakeholder.getId()}" class="btn"> <i class="fa fa-trash-o"></i> </a></td>-->
+                        </tr>
+                        </tbody>
+
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $("#exportButton").click(function () {
+                // parse the HTML table element having an id=exportTable
+                var dataSource = shield.DataSource.create({
+                    data: "#exportTable",
+                    schema: {
+                        type: "table",
+                        fields: {
+                            Id: { type: Number },
+                            Bank_Tranxn_Id: { type: String },
+                            Bill_Amount: { type: Number },
+                            Bill_Number: { type: String },
+                            Bill_Status: { type: String},
+                            Bill_Type:   { type: Number },
+                            Cancel_Date: { type: String},
+                            Cancel_By:   { type: String},
+                            Customer_Number: { type: Number},
+                            Due_Amount: { type: Number},
+                            Due_Date: { type: String},
+                            Issue_Date: { type: String},
+                            Paid_By: { type: String},
+                            Pay_Date: { type: String},
+                            Remarks: { type: String},
+                            Total_Amount: { type: Number},
+                            Utility_Tranxn_Id: { type: Number},
+                            Vat_Amount : { type: Number},
+                            Paid_Amount : { type: Number}
+
+                        }
+                    }
+                });
+
+                // when parsing is done, export the data to Excel
+                dataSource.read().then(function (data) {
+                    new shield.exp.OOXMLWorkbook({
+                        author: "PrepBootstrap",
+                        worksheets: [
+                            {
+                                name: "PrepBootstrap Table",
+                                rows: [
+                                    {
+                                        cells: [
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Id"
+                                            },
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Bank Tranxn Id"
+                                            },
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Bill Amount"
+                                            },
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Bill Number"
+                                            },
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Bill Status"
+                                            },
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Bill Type"
+                                            },
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Cancel Date"
+                                            },
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Cancel By"
+                                            },
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Customer Number"
+                                            },
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Due Amount"
+                                            },
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Due Date"
+                                            },
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Issue Date"
+                                            },
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Paid By"
+                                            },
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Pay Date"
+                                            },
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Remarks"
+                                            },
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Total Amount"
+                                            },
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Utility Tranxn Id"
+                                            },
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Vat Amount"
+                                            },
+                                            {
+                                                style: {
+                                                    bold: true
+                                                },
+                                                type: String,
+                                                value: "Paid Amount"
+                                            },
+                                        ]
+                                    }
+                                ].concat($.map(data, function(item) {
+                                    return {
+                                        cells: [
+                                            { type: Number, value: item.Id },
+                                            { type: String, value: item.Bank_Tranxn_Id},
+                                            { type: Number, value: item.Bill_Amount },
+                                            { type: String, value: item.Bill_Number },
+                                            { type: String, value: item.Bill_Status },
+                                            { type: Number, value: item.Bill_Type },
+                                            { type: String, value: item.Cancel_Date },
+                                            { type: String, value: item.Cancel_By },
+                                            { type: Number, value: item.Customer_Number },
+                                            { type: Number, value: item.Due_Amount },
+                                            { type: String, value: item.Due_Date },
+                                            { type: String, value: item.Issue_Date },
+                                            { type: String, value: item.Paid_By },
+                                            { type: String, value: item.Pay_Date },
+                                            { type: String, value: item.Remarks },
+                                            { type: Number, value: item.Total_Amount },
+                                            { type: Number, value: item.Utility_Tranxn_Id },
+                                            { type: Number, value: item.Vat_Amount },
+                                            { type: Number, value: item.Paid_Amount},
+                                        ]
+                                    };
+                                }))
+                            }
+                        ]
+                    }).saveAs({
+                        fileName: "PrepBootstrapExcel"
+                    });
+                });
+            });
+        });
+    </script>
+
+
+
+</div>
+</body>
+</html>

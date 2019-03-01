@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div class="col-md-12">
+        <h1 class="text-center">Stakeholder List</h1><br/>
+        <table class="table table-hover table-striped">
+            <tr>
+                <!--<th style="text-align: center">Id</th>-->
+                <th style="text-align: center">Name</th>
+                <th style="text-align: center">Adress</th>
+                <th style="text-align: center">Mobile</th>
+                <th style="text-align: center">Contact person name</th>
+                <th style="text-align: center">Status</th>
+                <th style="text-align: center">Action</th>
+            </tr>
+            <tr>
+                <!--<td th:text="${stakeholder.getId()}"></td>-->
+                <td th:text="${stakeholder.getName()}"></td>
+                <td th:text="${stakeholder.getAddress()}"></td>
+                <td th:text="${stakeholder.getContact_person_mobile()}"></td>
+                <td th:text="${stakeholder.getContact_person_name()}"></td>
+                <td th:if="${stakeholder.getStatus() == 1}" th:text="Active"></td>
+                <td th:if="${stakeholder.getStatus() == 0}" th:text="Inactive"></td>
+                <td> <a th:href="${'/stake/edit/'+ stakeholder.getId()}" class="btn"> <i class="fa fa-pencil-square-o"></i> </a>  <a th:href="${'/stake/delete/' + stakeholder.getId()}" class="btn"> <i class="fa fa-trash-o"></i> </a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
